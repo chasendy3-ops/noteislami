@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Baca Catatan - NOTE ISLAMIC</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdef5 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .note-card {
+            background: white;
+            border-radius: 25px;
+            padding: 35px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            color: #1565c0;
+            margin-bottom: 25px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: bold;
+            padding: 8px 15px;
+            border-radius: 30px;
+            transition: background 0.2s;
+        }
+
+        .back-btn:hover {
+            background: rgba(21, 101, 192, 0.1);
+        }
+
+        .note-title {
+            font-size: 32px;
+            font-weight: bold;
+            color: #0d47a1;
+            margin-bottom: 15px;
+            word-wrap: break-word;
+            border-left: 5px solid #1565c0;
+            padding-left: 20px;
+        }
+
+        .note-date {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 30px;
+            padding-left: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .note-content {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #333;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            background: #f8faff;
+            padding: 25px;
+            border-radius: 20px;
+            margin-top: 10px;
+            border: 1px solid #e0e7ff;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            justify-content: flex-end;
+        }
+
+        .edit-btn, .delete-btn-nav {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+
+        .edit-btn {
+            background: #1565c0;
+            color: white;
+        }
+
+        .edit-btn:hover {
+            background: #0d47a1;
+        }
+
+        .delete-btn-nav {
+            background: #ff5252;
+            color: white;
+        }
+
+        .delete-btn-nav:hover {
+            background: #ff1744;
+        }
+
+        .error-message {
+            text-align: center;
+            padding: 50px;
+            background: white;
+            border-radius: 20px;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .note-card {
+                padding: 20px;
+            }
+            .note-title {
+                font-size: 24px;
+            }
+            .note-content {
+                font-size: 16px;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="noteDisplay">
+            <!-- Catatan akan ditampilkan di sini -->
+        </div>
+    </div>
+
+    <script>
+        const STORAGE_KEY = 'islamic_notes';
+
+        function loadNotes() {
+            const stored = localStorage.getItem(STORAGE_KEY);
+            return stored ? JSON.parse(stored) : [];
+        }
+
+        function saveNotes(notes) {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(notes));
+        }
+
+        function getNoteIdFromUrl() {
+            const params = new URLSearchParams(window.location.search);
+            return parseInt(params.get('id'));
+        }
+
+        function deleteNoteAndRedirect(id) {
+            let notes = loadNotes();
+            notes = notes.filter(note => note.id !== id);
+            saveNotes(notes);
+            window.location.href = 'index.html';
+        }
+
+        function renderNote() {
+            const noteId = getNoteIdFromUrl();
+            const notes = loadNotes();
+            const note = notes.find(n => n.id === noteId);
+
+            const container = document.getElementById('noteDisplay');
+
+            if (!note) {
+                container.innerHTML = `
+                    <div class="error-message">
+                        <h3>📭 Catatan tidak ditemukan</h3>
+                        <p>Catatan mungkin sudah dihapus atau ID tidak valid.</p>
+                        <button class="edit-btn" onclick="window.location.href='index.html'" style="margin-top:20px">Kembali ke Dashboard</button>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = `
+                <div class="note-card">
+                    <button class="back-btn" onclick="window.location.href='index.html'">
+                        ← Kembali ke Dashboard
+                    </button>
+                    
+                    <div class="note-title">${escapeHtml(note.title)}</div>
+                    
+                    <div class="note-date">
+                        <span>📅 ${note.date || 'Tanggal tidak tersedia'}</span>
+                        <span>🕌 Catatan Sholawat</span>
+                    </div>
+                    
+                    <div class="note-content">
+                        ${escapeHtml(note.content).replace(/\n/g, '<br>')}
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="edit-btn" id="editNoteBtn">✏️ Edit Catatan</button>
+                        <button class="delete-btn-nav" id="deleteNoteBtn">🗑️ Hapus Catatan</button>
+                    </div>
+                </div>
+            `;
+
+            // Event untuk edit
+            document.getElementById('editNoteBtn').addEventListener('click', () => {
+                // Simpan data catatan yang akan diedit ke localStorage sementara
+                localStorage.setItem('edit_note_id', note.id);
+                localStorage.setItem('edit_note_title', note.title);
+                localStorage.setItem('edit_note_content', note.content);
+                window.location.href = 'edit.html?id=' + note.id;
+            });
+
+            // Event untuk hapus
+            document.getElementById('deleteNoteBtn').addEventListener('click', () => {
+                if (confirm('Yakin ingin menghapus catatan "' + note.title + '"?')) {
+                    deleteNoteAndRedirect(note.id);
+                }
+            });
+        }
+
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        renderNote();
+    </script>
+</body>
+</html>
