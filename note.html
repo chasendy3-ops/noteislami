@@ -1,148 +1,150 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Baca Catatan - NOTE ISLAMIC</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <title>Baca Catatan · Note Islamic</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;700&family=Inter:opsz@14..32&display=swap" rel="stylesheet" />
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #e3f2fd 0%, #bbdef5 100%);
+        html, body {
+            width: 100%;
             min-height: 100vh;
+            background: radial-gradient(circle at 20% 30%, #13203a 0%, #05070c 90%);
+            font-family: 'Scheherazade New', 'Inter', 'Segoe UI', serif;
+            color: #eef5ff;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
             padding: 20px;
         }
-
         .container {
+            width: 100%;
             max-width: 900px;
             margin: 0 auto;
         }
-
-        .note-card {
-            background: white;
-            border-radius: 25px;
-            padding: 35px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        .glass-card {
+            background: rgba(8, 14, 30, 0.65);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            border: 1px solid rgba(30, 100, 255, 0.25);
+            border-radius: 40px;
+            padding: 32px 28px;
+            box-shadow: 0 20px 50px rgba(0, 20, 80, 0.7), 0 0 30px rgba(20, 80, 255, 0.15);
         }
-
-        .back-btn {
-            background: none;
-            border: none;
-            font-size: 18px;
+        .neon-glow {
+            box-shadow: 0 0 20px #0a3b9e, 0 0 60px #06206b, 0 0 100px #03123d;
+        }
+        .btn-outline-neon {
+            background: transparent;
+            border: 1.5px solid #2a7aff;
+            color: #bfd9ff;
+            padding: 10px 24px;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
             cursor: pointer;
-            color: #1565c0;
-            margin-bottom: 25px;
+            transition: 0.25s;
+            backdrop-filter: blur(4px);
+            box-shadow: 0 0 12px rgba(30, 100, 255, 0.2);
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            font-weight: bold;
-            padding: 8px 15px;
-            border-radius: 30px;
-            transition: background 0.2s;
+            text-decoration: none;
+            margin-bottom: 24px;
         }
-
-        .back-btn:hover {
-            background: rgba(21, 101, 192, 0.1);
+        .btn-outline-neon:hover {
+            background: #1a4b9e;
+            border-color: #7bb3ff;
+            box-shadow: 0 0 30px #1a6aff, 0 0 60px #0a3b9e;
+            color: white;
+            transform: scale(1.02);
         }
-
-        .note-title {
-            font-size: 32px;
-            font-weight: bold;
-            color: #0d47a1;
-            margin-bottom: 15px;
-            word-wrap: break-word;
-            border-left: 5px solid #1565c0;
-            padding-left: 20px;
+        .note-detail-title {
+            font-family: 'Scheherazade New', serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #e1efff;
+            text-shadow: 0 0 25px #1a5fd0;
+            border-left: 5px solid #3d86ff;
+            padding-left: 24px;
+            margin-bottom: 8px;
+            word-break: break-word;
         }
-
-        .note-date {
-            color: #888;
-            font-size: 14px;
-            margin-bottom: 30px;
-            padding-left: 25px;
+        .note-detail-date {
+            color: #8aafec;
+            margin-left: 28px;
+            margin-bottom: 28px;
+            font-size: 1rem;
             display: flex;
-            align-items: center;
-            gap: 10px;
+            gap: 20px;
+            flex-wrap: wrap;
         }
-
-        .note-content {
-            font-size: 18px;
-            line-height: 1.8;
-            color: #333;
+        .note-detail-body {
+            background: rgba(0, 8, 28, 0.5);
+            padding: 30px;
+            border-radius: 40px;
+            font-size: 1.2rem;
+            line-height: 2;
             white-space: pre-wrap;
-            word-wrap: break-word;
-            background: #f8faff;
-            padding: 25px;
-            border-radius: 20px;
-            margin-top: 10px;
-            border: 1px solid #e0e7ff;
+            word-break: break-word;
+            border: 1px solid #1f5bbf55;
+            font-family: 'Inter', sans-serif;
+            color: #d7e7ff;
+            box-shadow: inset 0 0 40px #00113333;
         }
-
-        .action-buttons {
+        .action-row {
             display: flex;
-            gap: 15px;
-            margin-top: 30px;
+            gap: 18px;
             justify-content: flex-end;
+            margin-top: 32px;
+            flex-wrap: wrap;
         }
-
-        .edit-btn, .delete-btn-nav {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 30px;
+        .btn-danger-neon {
+            background: rgba(255, 40, 70, 0.15);
+            border: 1.5px solid #ff4d6d;
+            color: #ff8a9e;
+            padding: 10px 24px;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
             cursor: pointer;
-            font-weight: bold;
-            transition: all 0.2s;
+            transition: 0.25s;
+            backdrop-filter: blur(4px);
         }
-
-        .edit-btn {
-            background: #1565c0;
+        .btn-danger-neon:hover {
+            background: #b01030;
             color: white;
+            box-shadow: 0 0 30px #ff2a4a;
+            border-color: #ff1a3a;
         }
-
-        .edit-btn:hover {
-            background: #0d47a1;
-        }
-
-        .delete-btn-nav {
-            background: #ff5252;
-            color: white;
-        }
-
-        .delete-btn-nav:hover {
-            background: #ff1744;
-        }
-
-        .error-message {
-            text-align: center;
-            padding: 50px;
-            background: white;
-            border-radius: 20px;
-            color: #666;
-        }
-
-        @media (max-width: 768px) {
-            .note-card {
+        @media (max-width: 700px) {
+            .glass-card {
+                padding: 20px 14px;
+            }
+            .note-detail-title {
+                font-size: 2rem;
+                padding-left: 16px;
+            }
+            .note-detail-body {
+                font-size: 1rem;
                 padding: 20px;
-            }
-            .note-title {
-                font-size: 24px;
-            }
-            .note-content {
-                font-size: 16px;
-                padding: 15px;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div id="noteDisplay">
-            <!-- Catatan akan ditampilkan di sini -->
+        <div class="glass-card neon-glow" id="noteContainer">
+            <!-- Akan diisi JS -->
         </div>
     </div>
 
@@ -150,8 +152,10 @@
         const STORAGE_KEY = 'islamic_notes';
 
         function loadNotes() {
-            const stored = localStorage.getItem(STORAGE_KEY);
-            return stored ? JSON.parse(stored) : [];
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                return raw ? JSON.parse(raw) : [];
+            } catch { return []; }
         }
 
         function saveNotes(notes) {
@@ -163,77 +167,59 @@
             return parseInt(params.get('id'));
         }
 
-        function deleteNoteAndRedirect(id) {
-            let notes = loadNotes();
-            notes = notes.filter(note => note.id !== id);
-            saveNotes(notes);
-            window.location.href = 'index.html';
+        function escapeHtml(text) {
+            if (!text) return '';
+            const d = document.createElement('div');
+            d.textContent = text;
+            return d.innerHTML;
         }
 
         function renderNote() {
-            const noteId = getNoteIdFromUrl();
+            const id = getNoteIdFromUrl();
             const notes = loadNotes();
-            const note = notes.find(n => n.id === noteId);
-
-            const container = document.getElementById('noteDisplay');
+            const note = notes.find(n => n.id === id);
+            const container = document.getElementById('noteContainer');
 
             if (!note) {
                 container.innerHTML = `
-                    <div class="error-message">
-                        <h3>📭 Catatan tidak ditemukan</h3>
-                        <p>Catatan mungkin sudah dihapus atau ID tidak valid.</p>
-                        <button class="edit-btn" onclick="window.location.href='index.html'" style="margin-top:20px">Kembali ke Dashboard</button>
+                    <div style="text-align:center;padding:60px;">
+                        <h3 style="font-family:'Scheherazade New',serif;font-size:2rem;">📭 catatan hilang</h3>
+                        <button class="btn-outline-neon" onclick="window.location.href='index.html'" style="margin-top:20px;">kembali</button>
                     </div>
                 `;
                 return;
             }
 
             container.innerHTML = `
-                <div class="note-card">
-                    <button class="back-btn" onclick="window.location.href='index.html'">
-                        ← Kembali ke Dashboard
-                    </button>
-                    
-                    <div class="note-title">${escapeHtml(note.title)}</div>
-                    
-                    <div class="note-date">
-                        <span>📅 ${note.date || 'Tanggal tidak tersedia'}</span>
-                        <span>🕌 Catatan Sholawat</span>
-                    </div>
-                    
-                    <div class="note-content">
-                        ${escapeHtml(note.content).replace(/\n/g, '<br>')}
-                    </div>
-                    
-                    <div class="action-buttons">
-                        <button class="edit-btn" id="editNoteBtn">✏️ Edit Catatan</button>
-                        <button class="delete-btn-nav" id="deleteNoteBtn">🗑️ Hapus Catatan</button>
-                    </div>
+                <button class="btn-outline-neon" id="backBtn">← Dashboard</button>
+                <div class="note-detail-title">${escapeHtml(note.title)}</div>
+                <div class="note-detail-date">
+                    <span>📅 ${note.date || 'Tanggal tidak tersedia'}</span>
+                    <span>🕌 sholawat</span>
+                </div>
+                <div class="note-detail-body">${escapeHtml(note.content).replace(/\n/g, '<br>')}</div>
+                <div class="action-row">
+                    <button class="btn-outline-neon" id="editBtn" style="border-color:#5f9eff;">✏️ Edit</button>
+                    <button class="btn-danger-neon" id="deleteBtn">🗑️ Hapus</button>
                 </div>
             `;
 
-            // Event untuk edit
-            document.getElementById('editNoteBtn').addEventListener('click', () => {
-                // Simpan data catatan yang akan diedit ke localStorage sementara
-                localStorage.setItem('edit_note_id', note.id);
-                localStorage.setItem('edit_note_title', note.title);
-                localStorage.setItem('edit_note_content', note.content);
-                window.location.href = 'edit.html?id=' + note.id;
+            document.getElementById('backBtn').addEventListener('click', () => {
+                window.location.href = 'index.html';
             });
 
-            // Event untuk hapus
-            document.getElementById('deleteNoteBtn').addEventListener('click', () => {
-                if (confirm('Yakin ingin menghapus catatan "' + note.title + '"?')) {
-                    deleteNoteAndRedirect(note.id);
+            document.getElementById('editBtn').addEventListener('click', () => {
+                window.location.href = `edit.html?id=${id}`;
+            });
+
+            document.getElementById('deleteBtn').addEventListener('click', () => {
+                if (confirm(`Hapus catatan "${note.title}"?`)) {
+                    let all = loadNotes();
+                    all = all.filter(n => n.id !== id);
+                    saveNotes(all);
+                    window.location.href = 'index.html';
                 }
             });
-        }
-
-        function escapeHtml(text) {
-            if (!text) return '';
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
         }
 
         renderNote();

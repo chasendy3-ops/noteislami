@@ -1,137 +1,160 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Tambah Catatan - NOTE ISLAMIC</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <title>Tambah Catatan · Note Islamic</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;700&family=Inter:opsz@14..32&display=swap" rel="stylesheet" />
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #e3f2fd 0%, #bbdef5 100%);
+        html, body {
+            width: 100%;
             min-height: 100vh;
+            background: radial-gradient(circle at 20% 30%, #13203a 0%, #05070c 90%);
+            font-family: 'Scheherazade New', 'Inter', 'Segoe UI', serif;
+            color: #eef5ff;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
             padding: 20px;
         }
-
         .container {
+            width: 100%;
             max-width: 800px;
             margin: 0 auto;
         }
-
-        .card {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        .glass-card {
+            background: rgba(8, 14, 30, 0.65);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            border: 1px solid rgba(30, 100, 255, 0.25);
+            border-radius: 40px;
+            padding: 32px 28px;
+            box-shadow: 0 20px 50px rgba(0, 20, 80, 0.7), 0 0 30px rgba(20, 80, 255, 0.15);
         }
-
-        .back-btn {
-            background: none;
-            border: none;
-            font-size: 24px;
+        .neon-glow {
+            box-shadow: 0 0 20px #0a3b9e, 0 0 60px #06206b, 0 0 100px #03123d;
+        }
+        .btn-outline-neon {
+            background: transparent;
+            border: 1.5px solid #2a7aff;
+            color: #bfd9ff;
+            padding: 10px 24px;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
             cursor: pointer;
-            color: #1565c0;
-            margin-bottom: 20px;
+            transition: 0.25s;
+            backdrop-filter: blur(4px);
+            box-shadow: 0 0 12px rgba(30, 100, 255, 0.2);
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            font-weight: bold;
+            text-decoration: none;
+            margin-bottom: 24px;
         }
-
-        .back-btn:hover {
-            color: #0d47a1;
+        .btn-outline-neon:hover {
+            background: #1a4b9e;
+            border-color: #7bb3ff;
+            box-shadow: 0 0 30px #1a6aff, 0 0 60px #0a3b9e;
+            color: white;
+            transform: scale(1.02);
         }
-
-        h2 {
-            color: #1565c0;
-            margin-bottom: 25px;
-            font-size: 28px;
-            border-bottom: 3px solid #1565c0;
-            padding-bottom: 10px;
-            display: inline-block;
-        }
-
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 28px;
         }
-
-        label {
+        .form-group label {
             display: block;
-            font-weight: bold;
-            color: #0d47a1;
+            font-weight: 600;
+            font-size: 1.1rem;
             margin-bottom: 8px;
-            font-size: 16px;
+            color: #bbd6ff;
+            letter-spacing: 0.3px;
+            text-shadow: 0 0 8px #0033aa55;
         }
-
-        input, textarea {
+        .form-control {
             width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #e0e0e0;
-            border-radius: 12px;
-            font-size: 16px;
-            font-family: inherit;
-            transition: border-color 0.2s;
+            padding: 16px 20px;
+            background: rgba(0, 10, 30, 0.6);
+            border: 1.5px solid #1f5bbf;
+            border-radius: 30px;
+            color: #edf4ff;
+            font-size: 1.1rem;
+            font-family: 'Inter', sans-serif;
+            backdrop-filter: blur(4px);
+            transition: 0.25s;
+            box-shadow: inset 0 0 15px #001a4d33;
         }
-
-        input:focus, textarea:focus {
+        .form-control:focus {
             outline: none;
-            border-color: #1565c0;
+            border-color: #6aaaff;
+            box-shadow: 0 0 30px #1a6aff77, inset 0 0 20px #0033aa33;
+            background: rgba(4, 16, 44, 0.8);
         }
-
-        textarea {
+        textarea.form-control {
             min-height: 200px;
             resize: vertical;
+            border-radius: 30px;
         }
-
-        .btn-save {
-            background: #1565c0;
+        .btn-primary-neon {
+            background: #0a2e70;
+            border: 1px solid #3d86ff;
+            padding: 16px 28px;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 1.3rem;
             color: white;
-            border: none;
-            padding: 14px 30px;
-            border-radius: 12px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
             width: 100%;
-            transition: background 0.2s;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 0 25px #0033aa66;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 1px;
         }
-
-        .btn-save:hover {
-            background: #0d47a1;
+        .btn-primary-neon:hover {
+            background: #1548a5;
+            box-shadow: 0 0 50px #1a6aff, 0 0 100px #0033aa;
+            border-color: #9ac2ff;
+            transform: scale(1.01);
         }
-
-        @media (max-width: 768px) {
-            .card {
-                padding: 20px;
+        h2 {
+            font-family: 'Scheherazade New', serif;
+            font-size: 2.2rem;
+            color: #c2ddff;
+            text-shadow: 0 0 20px #1a5fd0;
+            margin-bottom: 24px;
+        }
+        @media (max-width: 700px) {
+            .glass-card {
+                padding: 20px 14px;
             }
             h2 {
-                font-size: 24px;
+                font-size: 1.8rem;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="card">
-            <button class="back-btn" onclick="window.location.href='index.html'">← Kembali</button>
-            <h2>➕ Tambah Catatan Sholawat</h2>
-            
+        <div class="glass-card neon-glow">
+            <button class="btn-outline-neon" id="backBtn">← Kembali</button>
+            <h2>➕ Tambah Catatan</h2>
             <div class="form-group">
-                <label>📌 Judul Sholawat/Catatan</label>
-                <input type="text" id="judul" placeholder="Contoh: Sholawat Badar, Sholawat Nariyah, dll." autocomplete="off">
+                <label>📌 Judul / Nama Sholawat</label>
+                <input class="form-control" id="judulInput" placeholder="misal: Sholawat Badar" autocomplete="off" />
             </div>
-
             <div class="form-group">
-                <label>📝 Tulis Catatan</label>
-                <textarea id="isiCatatan" placeholder="Tulis lirik sholawat, makna, atau catatan harian sholawat di sini..."></textarea>
+                <label>📝 Isi catatan (lirik, doa, makna)</label>
+                <textarea class="form-control" id="isiInput" placeholder="Tulis disini…" rows="6"></textarea>
             </div>
-
-            <button class="btn-save" id="simpanBtn">💾 SIMPAN</button>
+            <button class="btn-primary-neon" id="simpanBtn">💾 Simpan</button>
         </div>
     </div>
 
@@ -139,50 +162,45 @@
         const STORAGE_KEY = 'islamic_notes';
 
         function loadNotes() {
-            const stored = localStorage.getItem(STORAGE_KEY);
-            return stored ? JSON.parse(stored) : [];
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                return raw ? JSON.parse(raw) : [];
+            } catch { return []; }
         }
 
         function saveNotes(notes) {
             localStorage.setItem(STORAGE_KEY, JSON.stringify(notes));
         }
 
-        function getCurrentDate() {
-            const now = new Date();
-            return now.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+        function getToday() {
+            return new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
         }
 
+        document.getElementById('backBtn').addEventListener('click', () => {
+            window.location.href = 'index.html';
+        });
+
         document.getElementById('simpanBtn').addEventListener('click', () => {
-            const judul = document.getElementById('judul').value.trim();
-            const isi = document.getElementById('isiCatatan').value.trim();
+            const judul = document.getElementById('judulInput').value.trim();
+            const isi = document.getElementById('isiInput').value.trim();
 
             if (!isi) {
-                alert('⚠️ Catatan tidak boleh kosong!');
+                alert('⚠️ catatan tidak boleh kosong');
                 return;
             }
 
-            let notes = loadNotes();
-            
+            const notes = loadNotes();
             const newNote = {
                 id: Date.now(),
                 title: judul || 'Catatan Sholawat',
                 content: isi,
-                date: getCurrentDate(),
+                date: getToday(),
                 createdAt: new Date().toISOString()
             };
-
-            notes.unshift(newNote); // Tambah di awal
+            notes.unshift(newNote);
             saveNotes(notes);
-
-            alert('✅ Catatan berhasil disimpan!');
+            alert('✅ tersimpan!');
             window.location.href = 'index.html';
-        });
-
-        // Enter untuk submit? Biarkan manual
-        document.getElementById('isiCatatan').addEventListener('keydown', (e) => {
-            if (e.ctrlKey && e.key === 'Enter') {
-                document.getElementById('simpanBtn').click();
-            }
         });
     </script>
 </body>
